@@ -12,7 +12,8 @@
 start(_StartType, _StartArgs) ->
     chat_server:start_link(),
     Dispatch = cowboy_router:compile([{'_',
-                                       [{"/health", health_route, []}]}]),
+                                       [{"/health", health_route, []},
+                                       {"/clients",clients_route,[]}]}]),
     {ok, _} = cowboy:start_clear(http,
                                  [{port, 8080}],
                                  #{env => #{dispatch => Dispatch},
